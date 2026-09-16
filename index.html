@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IR Checkup - โรงเรียนราชินีบูรณะ</title>
+    <title>PreScreenIR - smte4/1</title>
     <style>
         /* --- CSS: สไตล์หน้าจอ --- */
         #riskText {
@@ -11,11 +11,11 @@
      line-height: 1.5;   
      font-weight: 500;   
         }
-        body { font-family: 'Sarabun', sans-serif; background-color: #faf89a; display: flex; justify-content: center; padding: 20px; margin: 0; }
+        body { font-family: 'Sarabun', sans-serif; background-color: #e7ffff; display: flex; justify-content: center; padding: 20px; margin: 0; }
         .container { background: white; width: 100%; max-width: 480px; padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center; box-sizing: border-box; }
         
-        h2 { color: #5e4fdb; margin-bottom: 10px; }
-        .subtitle { color: #6c757d; margin-bottom: 25px; line-height: 1.6; }
+        h2 { color: #e999d5; margin-bottom: 10px; }
+        .subtitle { color: #ce74f1; margin-bottom: 25px; line-height: 1.6; }
         
         /* การซ่อนหน้าจอ */
         .page { display: none; }
@@ -23,26 +23,26 @@
 
         /* หน้าต้อนรับ */
         .intro-img { width: 150px; margin-bottom: 20px; }
-        .feature-list { text-align: left; background: #f8f9fa; padding: 20px; border-radius: 15px; margin-bottom: 25px; }
+        .feature-list { text-align: left; background: #eaece9; padding: 20px; border-radius: 15px; margin-bottom: 25px; }
         .feature-item { margin-bottom: 10px; display: flex; gap: 10px; font-size: 15px; }
 
         /* ส่วนแบบฟอร์ม */
         .input-group { text-align: left; margin-bottom: 18px; }
         label { font-weight: bold; color: #444; display: block; margin-bottom: 8px; font-size: 15px; }
         input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 12px; font-size: 16px; box-sizing: border-box; transition: 0.3s; }
-        input:focus { border-color: #5e4fdb; outline: none; box-shadow: 0 0 5px rgba(94,79,219,0.3); }
+        input:focus { border-color: #cb4fdb; outline: none; box-shadow: 0 0 5px rgba(94,79,219,0.3); }
 
         /* ปุ่มกด */
         button { border: none; padding: 16px; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; }
-        .btn-primary { background-color: #5e4fdb; color: white; }
-        .btn-primary:hover { background-color: #4a3eb3; transform: translateY(-2px); }
+        .btn-primary { background-color: #d2ffa8; color: white; }
+        .btn-primary:hover { background-color: #c1ebad; transform: translateY(-2px); }
         .btn-secondary { background-color: #6c757d; color: white; margin-top: 10px; }
         
         /* ส่วนแสดงผล */
         .risk-card { padding: 25px; border-radius: 20px; margin-top: 25px; text-align: center; }
         .risk-text { font-size: 32px; font-weight: bold; margin: 10px 0; }
         .advice-card { background: #fff; border: 1px solid #eee; border-radius: 20px; padding: 20px; margin-top: 20px; text-align: left; }
-        .advice-item { display: flex; gap: 12px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #f9f9f9; }
+        .advice-item { display: flex; gap: 12px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eeeeee; }
     </style>
 </head>
 <body>
@@ -50,17 +50,17 @@
     <div class="container">
         <div id="introPage" class="page active">
             <img src="RN.png" alt="RN Logo" class="intro-img">
-            <h2>ยินดีต้อนรับสู่ IR Checkup</h2>
-            <p class="subtitle">ระบบประเมินพฤติกรรมเสี่ยงต่อภาวะดื้ออินซูลิน<br>พัฒนาโดย โรงเรียนราชินีบูรณะ</p>
+            <h2>PreScreenIR</h2>
+            <p class="subtitle">ระบบประเมินพฤติกรรมเสี่ยงต่อภาวะดื้ออินซูลิน<br>พัฒนาโดย smte4/1</p>
             
             <div class="feature-list">
-                <div class="feature-item"><span>✅</span> <span>ประเมินความเสี่ยงด้วยหลักสถิติ Logistic Regression</span></div>
-                <div class="feature-item"><span>✅</span> <span>วิเคราะห์พฤติกรรมการใช้ชีวิตรายบุคคล</span></div>
-                <div class="feature-item"><span>✅</span> <span>ให้คำแนะนำเบื้องต้นเพื่อสุขภาพที่ดีขึ้น</span></div>
-                <div class="feature-item"><span>✅</span> <span>ผลที่ได้เป็นการประเมินเบื้องต้นเท่านั้น </span></div>
-                <div class="feature-item"><span>✅  </span> <span>หากต้องการผลที่แน่นอนควรพบแพทย์</span></div>
+                <div class="feature-item"><span>✅</span> <span>ประเมินความเสี่ยงด้วยหลักสถิติ </span></div>
+                <div class="feature-item"><span>✅</span> <span>วิเคราะห์พฤติกรรมการใช้ชีวิต</span></div>
+                <div class="feature-item"><span>✅</span> <span>ให้คำแนะนำเบื้องต้นในด้านสุขภาพ</span></div>
+                <div class="feature-item"><span>✅</span> <span>ผลที่ได้เป็นการคร่าวๆเท่านั้น </span></div>
+                <div class="feature-item"><span>✅  </span> <span>หากอยากได้ผลที่แน่นอนควรพบแพทย์</span></div>
                 <div class="feature-item"><span>✅  </span> <span>ผู้ใช้งานควรมีอายุอยู่ระหว่าง 13 - 23 ปี</span></div>
-                <div class="feature-item"><span>🔒</span> <span>ข้อมูลของคุณจะไม่ถูกเก็บไว้และจะหายไปทันทีที่กดปุ่มย้อนกลับ</span></div>
+                <div class="feature-item"><span>🔒</span> <span>ข้อมูลของคุณจะหายไปทันทีเมื่อทำแบบทดสอบเสร็จ</span></div>
             </div>
 
             <button class="btn-primary" onclick="showPage('surveyPage')">เริ่มทำแบบประเมิน</button>
@@ -112,7 +112,7 @@
             </div>
 
             <div class="advice-card">
-                <strong style="display:block; margin-bottom:15px; color:#444;">💡 คำแนะนำสำหรับคุณ:</strong>
+                <strong style="display:block; margin-bottom:15px; color:#d5d6d5;">💡 คำแนะนำสำหรับคุณ:</strong>
                 <div id="adviceList"></div>
             </div>
 
@@ -224,7 +224,7 @@
             if(x.x5 < 3) adviceHTML += `<div class="advice-item">🏋️ <span><b>ขาดการออกกำลังกาย:</b> พยายามขยับร่างกายให้มากขึ้น</span></div>`;
             if(x.x6 < 7) adviceHTML += `<div class="advice-item">😴 <span><b>พักผ่อนน้อย:</b> ควรนอนให้ครบ 7-8 ชม. เพื่อระบบเผาผลาญที่ดี</span></div>`;
             
-            document.getElementById('adviceList').innerHTML = adviceHTML || "🌟 คุณมีพฤติกรรมสุขภาพที่ดีมาก รักษาระดับนี้ไว้ต่อไปนะครับ";
+            document.getElementById('adviceList').innerHTML = adviceHTML || "🌟 คุณมีพฤติกรรมสุขภาพที่ดีมาก รักษาระดับนี้ไว้ต่อไปนะคะ";
         }
 
         function resetAll() {
