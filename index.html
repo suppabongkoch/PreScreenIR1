@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IR Checkup - โรงเรียนราชินีบูรณะ</title>
+    <style>
+        /* --- CSS: สไตล์หน้าจอ --- */
+        #riskText {
+        font-size: 16px;    
+     line-height: 1.5;   
+     font-weight: 500;   
+        }
+        body { font-family: 'Sarabun', sans-serif; background-color: #faf89a; display: flex; justify-content: center; padding: 20px; margin: 0; }
+        .container { background: white; width: 100%; max-width: 480px; padding: 30px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center; box-sizing: border-box; }
+        
+        h2 { color: #5e4fdb; margin-bottom: 10px; }
+        .subtitle { color: #6c757d; margin-bottom: 25px; line-height: 1.6; }
+        
+        /* การซ่อนหน้าจอ */
+        .page { display: none; }
+        .active { display: block; }
+
+        /* หน้าต้อนรับ */
+        .intro-img { width: 150px; margin-bottom: 20px; }
+        .feature-list { text-align: left; background: #f8f9fa; padding: 20px; border-radius: 15px; margin-bottom: 25px; }
+        .feature-item { margin-bottom: 10px; display: flex; gap: 10px; font-size: 15px; }
+
+        /* ส่วนแบบฟอร์ม */
+        .input-group { text-align: left; margin-bottom: 18px; }
+        label { font-weight: bold; color: #444; display: block; margin-bottom: 8px; font-size: 15px; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 12px; font-size: 16px; box-sizing: border-box; transition: 0.3s; }
+        input:focus { border-color: #5e4fdb; outline: none; box-shadow: 0 0 5px rgba(94,79,219,0.3); }
+
+        /* ปุ่มกด */
+        button { border: none; padding: 16px; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; }
+        .btn-primary { background-color: #5e4fdb; color: white; }
+        .btn-primary:hover { background-color: #4a3eb3; transform: translateY(-2px); }
+        .btn-secondary { background-color: #6c757d; color: white; margin-top: 10px; }
+        
+        /* ส่วนแสดงผล */
+        .risk-card { padding: 25px; border-radius: 20px; margin-top: 25px; text-align: center; }
+        .risk-text { font-size: 32px; font-weight: bold; margin: 10px 0; }
+        .advice-card { background: #fff; border: 1px solid #eee; border-radius: 20px; padding: 20px; margin-top: 20px; text-align: left; }
+        .advice-item { display: flex; gap: 12px; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #f9f9f9; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="introPage" class="page active">
+            <img src="RN.png" alt="RN Logo" class="intro-img">
+            <h2>ยินดีต้อนรับสู่ IR Checkup</h2>
+            <p class="subtitle">ระบบประเมินพฤติกรรมเสี่ยงต่อภาวะดื้ออินซูลิน<br>พัฒนาโดย โรงเรียนราชินีบูรณะ</p>
+            
+            <div class="feature-list">
+                <div class="feature-item"><span>✅</span> <span>ประเมินความเสี่ยงด้วยหลักสถิติ Logistic Regression</span></div>
+                <div class="feature-item"><span>✅</span> <span>วิเคราะห์พฤติกรรมการใช้ชีวิตรายบุคคล</span></div>
+                <div class="feature-item"><span>✅</span> <span>ให้คำแนะนำเบื้องต้นเพื่อสุขภาพที่ดีขึ้น</span></div>
+                <div class="feature-item"><span>✅</span> <span>ผลที่ได้เป็นการประเมินเบื้องต้นเท่านั้น </span></div>
+                <div class="feature-item"><span>✅  </span> <span>หากต้องการผลที่แน่นอนควรพบแพทย์</span></div>
+                <div class="feature-item"><span>✅  </span> <span>ผู้ใช้งานควรมีอายุอยู่ระหว่าง 13 - 23 ปี</span></div>
+                <div class="feature-item"><span>🔒</span> <span>ข้อมูลของคุณจะไม่ถูกเก็บไว้และจะหายไปทันทีที่กดปุ่มย้อนกลับ</span></div>
+            </div>
+
+            <button class="btn-primary" onclick="showPage('surveyPage')">เริ่มทำแบบประเมิน</button>
+        </div>
+
+        <div id="surveyPage" class="page">
+            <h2>ข้อมูลสุขภาพ</h2>
+            <p class="subtitle">กรุณากรอกข้อมูลตามความเป็นจริง</p>
+            <hr style="border:0; border-top:1px solid #eee; margin-bottom:20px;">
+
+            <form id="irForm">
+                <div class="input-group">
+                    <label>เพศกำเนิด </label>
+                    <select id="x9">
+                        <option value="1">ชาย</option>
+                        <option value="0">หญิง</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>น้ำหนัก (กก.) และ ส่วนสูง (ซม.)</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="weight" placeholder="น้ำหนัก" required>
+                        <input type="number" id="height" placeholder="ส่วนสูง" required>
+                    </div>
+                </div>
+
+                <div class="input-group"><label>อายุ (ปี) </label><input type="number" id="x2" required></div>
+                <div class="input-group"><label>ดื่มน้ำหวาน/ชานม (ครั้ง/สัปดาห์) </label><input type="number" id="x3" required></div>
+                <div class="input-group"><label>ทานขนม/อาหารแปรรูป (ครั้ง/สัปดาห์) </label><input type="number" id="x4" required></div>
+                <div class="input-group"><label>ออกกำลังกาย >30 นาที (ครั้ง/สัปดาห์) </label><input type="number" id="x5" required></div>
+                <div class="input-group"><label>นอนหลับพักผ่อน (ชม./วัน) </label><input type="number" id="x6" required></div>
+                <div class="input-group"><label>ความเครียด/กดดัน (ครั้ง/สัปดาห์) </label><input type="number" id="x7" required></div>
+                <div class="input-group">
+                    <label>ประวัติเบาหวานในครอบครัว </label>
+                    <select id="x8"><option value="0">ไม่มี</option><option value="1">มี</option></select>
+                </div>
+
+                <button type="button" class="btn-primary" onclick="calculateRisk()">ประมวลผลความเสี่ยง</button>
+                <button type="button" class="btn-secondary" onclick="showPage('introPage')">ย้อนกลับ</button>
+            </form>
+        </div>
+
+        <div id="resultPage" class="page">
+            <h2>ผลการประเมิน</h2>
+            <div id="riskCard" class="risk-card">
+                <div id="probValue" style="font-size: 14px; opacity: 0.7;"></div>
+                <div id="riskText" class="risk-text"></div>
+            </div>
+
+            <div class="advice-card">
+                <strong style="display:block; margin-bottom:15px; color:#444;">💡 คำแนะนำสำหรับคุณ:</strong>
+                <div id="adviceList"></div>
+            </div>
+
+            <button class="btn-primary" style="margin-top:20px;" onclick="resetAll()">ทำแบบประเมินอีกครั้ง</button>
+        </div>
+    </div>
+
+    <script>
+        // --- ส่วนการจัดการหน้าจอ ---
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        // --- ส่วนคำนวณ Logistic Regression ---
+        const stats = {
+            x1: { m: 21.09343, s: 4.776072 }, // BMI 
+            x2: { m: 16.17969, s: 2.330747 }, // อายุ
+            x3: { m: 4.291667, s: 3.761608 },  // น้ำหวาน
+            x4: { m: 6.169271, s: 5.246906 },  // ขนม
+            x5: { m: 2.888021, s: 4.156276 },  // ออกกำลังกาย
+            x6: { m: 8.153646, s: 3.097179 },  // นอนหลับ
+            x7: { m: 4.802083, s: 3.97609 }   // ความเครียด
+        };
+        const alpha = {
+            a0: -3.72876, a1: 0.940483, a2: 0.040879, a3: 0.163152, a4: 0.109824,
+            a5: -0.70519, a6: -1.46763, a7: -0.09551, a8: 0.486539, a9: -0.08521
+        };
+     
+        function calculateRisk() {
+            let w = parseFloat(document.getElementById('weight').value);
+            let h = parseFloat(document.getElementById('height').value) / 100;
+            if(!w || !h || isNaN(w) || isNaN(h)) { alert("กรุณากรอกข้อมูลน้ำหนักและส่วนสูงให้ครบค่ะ"); return; }
+
+            let rawData = {
+                x1: w / (h * h), // BMI
+                x2: parseFloat(document.getElementById('x2').value) || 0,
+                x3: parseFloat(document.getElementById('x3').value) || 0,
+                x4: parseFloat(document.getElementById('x4').value) || 0,
+                x5: parseFloat(document.getElementById('x5').value) || 0,
+                x6: parseFloat(document.getElementById('x6').value) || 0,
+                x7: parseFloat(document.getElementById('x7').value) || 0,
+                x8: parseFloat(document.getElementById('x8').value) || 0,
+                x9: parseFloat(document.getElementById('x9').value) || 0
+            };
+
+            // คำนวณ Z-scores
+            let z1 = (rawData.x1 - stats.x1.m) / stats.x1.s;
+            let z2 = (rawData.x2 - stats.x2.m) / stats.x2.s;
+            let z3 = (rawData.x3 - stats.x3.m) / stats.x3.s;
+            let z4 = (rawData.x4 - stats.x4.m) / stats.x4.s;
+            let z5 = (rawData.x5 - stats.x5.m) / stats.x5.s;
+            let z6 = (rawData.x6 - stats.x6.m) / stats.x6.s;
+            let z7 = (rawData.x7 - stats.x7.m) / stats.x7.s;
+            let z8 = rawData.x8; // Binary variable
+            let z9 = rawData.x9; // Binary variable
+
+            // คำนวณ Logit (z)
+            let logit = alpha.a0 + (alpha.a1*z1) + (alpha.a2*z2) + (alpha.a3*z3) + 
+                        (alpha.a4*z4) + (alpha.a5*z5) + (alpha.a6*z6) + 
+                        (alpha.a7*z7) + (alpha.a8*z8) + (alpha.a9*z9);
+
+            let p = 1 / (1 + Math.exp(-logit));
+            
+            displayResult(p, rawData); // ส่ง rawData ไปแสดงผล
+            showPage('resultPage');
+        }
+
+        function displayResult(p, x) { // เปลี่ยนพารามิเตอร์เป็น x ให้ตรงกับโค้ดด้านล่าง
+            const card = document.getElementById('riskCard');
+            const text = document.getElementById('riskText');
+            document.getElementById('probValue').innerText = `ค่าความน่าจะเป็น (P) = ${p.toFixed(4)}`;
+
+            // กำหนดสีพื้นหลังตามความเสี่ยง
+            if (p >= 0.137) {
+                card.style.backgroundColor = "#ffebee";
+                text.innerHTML = `
+                    <div style="font-size: 16px; margin-bottom: 15px; color: #b71c1c;">
+                        ⚠️ คุณมีความเสี่ยงสูงต่อภาวะดื้ออินซูลิน แนะนําให้ปรึกษาแพทย์เพื่อตรวจเช็กอย่างละเอียด
+                    </div>
+                    <div style="font-size: 14px; font-weight: normal; color: #666; border-top: 1px solid #ddd; padding-top: 10px;">
+                        <b>หมายเหตุ:</b> ผลการประเมินนี้เป็นเพียงการวิเคราะห์เบื้องต้นจากข้อมูลพฤติกรรม ไม่สามารถใช้แทนการวินิจฉัยโดยแพทย์ได้
+                    </div>`;
+            } else if (p >= 0.075) {
+                card.style.backgroundColor = "#fff8e1";
+                text.innerHTML = `
+                    <div style="font-size: 16px; margin-bottom: 15px; color: #f57f17;">
+                        🟡 คุณมีความเสี่ยงปานกลางต่อภาวะดื้ออินซูลิน แนะนำให้คุณปรับเปลี่ยนพฤติกรรมการใช้ชีวิต
+                    </div>
+                    <div style="font-size: 14px; font-weight: normal; color: #666; border-top: 1px solid #ddd; padding-top: 10px;">
+                        <b>หมายเหตุ:</b> ผลการประเมินนี้เป็นเพียงการวิเคราะห์เบื้องต้นจากข้อมูลพฤติกรรม ไม่สามารถใช้แทนการวินิจฉัยโดยแพทย์ได้
+                    </div>`;    
+            } else {
+                card.style.backgroundColor = "#e8f5e9";
+                text.innerHTML = `
+                    <div style="font-size: 22px; margin-bottom: 15px; color: #1b5e20;">
+                        ✅ คุณมีความเสี่ยงต่ำต่อภาวะดื้ออินซูลิน
+                    </div>
+                    <div style="font-size: 14px; font-weight: normal; color: #666; border-top: 1px solid #ddd; padding-top: 10px;">
+                        <b>หมายเหตุ:</b> ผลการประเมินนี้เป็นเพียงการวิเคราะห์เบื้องต้นจากข้อมูลพฤติกรรม ไม่สามารถใช้แทนการวินิจฉัยโดยแพทย์ได้
+                    </div>`;
+            }
+
+           
+            let adviceHTML = "";
+            if(x.x1 > 23) adviceHTML += `<div class="advice-item">🏃 <span><b>BMI เกินเกณฑ์:</b> ควรเลี่ยงของทอดและคุมน้ำหนัก</span></div>`;
+            if(x.x3 > 2) adviceHTML += `<div class="advice-item">🥤 <span><b>ดื่มหวานบ่อย:</b> ควรลดน้ำหวานเหลือสัปดาห์ละ 1 ครั้ง</span></div>`;
+            if(x.x5 < 3) adviceHTML += `<div class="advice-item">🏋️ <span><b>ขาดการออกกำลังกาย:</b> พยายามขยับร่างกายให้มากขึ้น</span></div>`;
+            if(x.x6 < 7) adviceHTML += `<div class="advice-item">😴 <span><b>พักผ่อนน้อย:</b> ควรนอนให้ครบ 7-8 ชม. เพื่อระบบเผาผลาญที่ดี</span></div>`;
+            
+            document.getElementById('adviceList').innerHTML = adviceHTML || "🌟 คุณมีพฤติกรรมสุขภาพที่ดีมาก รักษาระดับนี้ไว้ต่อไปนะครับ";
+        }
+
+        function resetAll() {
+            document.getElementById('irForm').reset();
+            showPage('introPage');
+        }
+    </script>
+</body>
+</html>
